@@ -1,25 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab 0 - A Game of Memory</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header class="header">
-        <h1>Lab 0 - The Ultimate Game of Memory</h1>
-    </header>
+<html lang="">
 
-    <main class="main">
-        <section class="game-controls">
-            <h3>number field and go button</h3>
-        </section>
-        <section class="game-zone">
-            <div>
-                <h3>game buttons and shuffle area</h3>
-            </div>
-        </section>
-    </main>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 0 - A Game of Memory</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <header class="header">
+    <h1>Lab 0 - The Ultimate Game of Memory</h1>
+  </header>
+
+  <main class="main">
+    <section class="game-controls-area">
+
+      <form onsubmit="return false;">
+        <label for="input"></label>
+        <br>
+        <input type="text" id="input" name="input" inputmode="numeric">
+        <button type="button" id="go-btn">GO</button>
+        <br>
+        <span id="status" class="status"></span>
+      </form>
+
+    </section>
+
+    <section class="game-play-area">
+    </section>
+
+  </main>
+
+  <script type="module" src="js/script.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,40 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-controls-area {
+    flex: 0 0 auto;
+    display: flex;
+    background-color:chartreuse;
+    justify-content: center;
+    padding: 5px;
+}
+
+.game-play-area {
+    flex: 1 1 auto;
+    display: flex;
+    position: relative;
+    min-height: 300px;
+    justify-content: center;
+    padding: 12px;
+    background-color: blanchedalmond;
+}
+
+.status {
+    margin-left: 1rem;
+    font-weight: 600;
+}
