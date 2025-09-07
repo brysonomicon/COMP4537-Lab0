@@ -11,6 +11,17 @@ body {
     padding: 5px;
 }
 
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo {
+    width: 75px;
+    height: auto;
+    padding: 30px;
+}
+
 .main {
     flex: 1 1 auto;
     display: flex;

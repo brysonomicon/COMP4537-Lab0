@@ -119,11 +119,13 @@ export class GameController {
             tile.disable();
         }
 
-        this.setStatus(outcome ? this.messages.STATUS_EXCELLENT : this.messages.STATUS_WRONG);
+        this.setStatus(outcome 
+            ? this.messages.STATUS_EXCELLENT 
+            : this.messages.STATUS_WRONG);
         this.goButton.disabled = false;
 
         await this.layout.sleep(2000);
-        
+
         this.setStatus(this.messages.STATUS_PLAY_AGAIN);
     }
 
