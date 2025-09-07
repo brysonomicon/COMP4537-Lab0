@@ -109,7 +109,7 @@ export class GameController {
         }
     }
 
-    handleEndGame(outcome)
+    async handleEndGame(outcome)
     {
         this.isPlaying = false;
 
@@ -121,6 +121,8 @@ export class GameController {
 
         this.setStatus(outcome ? this.messages.STATUS_EXCELLENT : this.messages.STATUS_WRONG);
         this.goButton.disabled = false;
+        await this.layout.sleep(2000);
+        this.setStatus(this.messages.STATUS_PLAY_AGAIN);
     }
 
     setStatus(text)

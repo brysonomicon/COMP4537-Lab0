@@ -6,4 +6,5 @@ export class Messages {
   static STATUS_READY        = "Can you remember the correct order?";
   static STATUS_EXCELLENT    = "You've got a memory like an elephant!";
   static STATUS_WRONG        = "Wrong order! Maybe next time";
+  static STATUS_PLAY_AGAIN   = "Play Again?"
 }
