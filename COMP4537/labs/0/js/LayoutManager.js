@@ -50,9 +50,9 @@ export class LayoutManager {
      */
     layoutRandom(tiles)
     {
-        const bounds   = this.gameArea.getBoundingClientRect();
-        const placed   = [];
-        const shuffled = tiles;
+        const containerSize = this.gameArea.getBoundingClientRect();
+        const placedTiles   = [];
+        const shuffled      = tiles.slice();
 
         for (let i = shuffled.length - 1; i > 0; --i)
         {
@@ -62,31 +62,42 @@ export class LayoutManager {
 
         for (const tile of shuffled)
         {
-            const size = tile.getDimensions();
-            const maxX = bounds.width - size.width;
-            const maxY = bounds.height - size.height;
+            const tileSize = tile.getDimensions();
+            const maxX     = Math.max(0, Math.floor(containerSize.width - tileSize.width - this.gap));
+            const maxY     = Math.max(0, Math.floor(containerSize.height - tileSize.height - this.gap));
 
             while (true)
             {
-                const x = (maxX < 0) ? this.gap : Math.floor(Math.random() * (maxX + 1));
-                const y = (maxY < 0) ? this.gap : Math.floor(Math.random() * (maxY + 1));
-                const newPosition = { x, y, width: size.width, height: size.height };
+                const x = this.gap + Math.floor(Math.random() * (maxX + 1));
+                const y = this.gap + Math.floor(Math.random() * (maxY + 1));
+
+                tile.setLocation(new Position(x, y));
+                const current = tile.getDimensions();
+
+                const newPosition = { 
+                    x: Math.floor(current.left - containerSize.left), 
+                    y: Math.floor(current.top - containerSize.top), 
+                    width: current.width, 
+                    height: current.height 
+                };
 
                 let collision = false;
 
-                for (const tile of placed)
+                for (const placed of placedTiles)
                 {
-                    if (this.isOverlapped(newPosition, tile))
+                    if (this.isOverlapped(newPosition, placed))
                     {
                         collision = true;
+
                         break;
                     }
                 }
 
                 if (!collision)
                 {
-                    placed.push(newPosition);
+                    placedTiles.push(newPosition);
                     tile.setLocation(new Position(newPosition.x, newPosition.y));
+                    
                     break;
                 }
             }
@@ -101,11 +112,12 @@ export class LayoutManager {
      */
     isOverlapped(rectA, rectB)
     {
+        const margin = this.gap;
         return !(
-            rectA.x + rectA.width <= rectB.x ||
-            rectA.x >= rectB.x + rectB.width ||
-            rectA.y + rectA.height <= rectB.height ||
-            rectA.height >= rectB.y + rectB.height
+            rectA.x + rectA.width + margin <= rectB.x ||
+            rectA.x >= rectB.x + rectB.width + margin ||
+            rectA.y + rectA.height + margin <= rectB.y ||
+            rectA.y >= rectB.y + rectB.height + margin
         );
     }
 
@@ -118,8 +130,8 @@ export class LayoutManager {
     {
         const bounds = this.gameArea.getBoundingClientRect();
         const size   = tile.getDimensions();
-        const maxX   = bounds.width - size.width;
-        const maxY   = bounds.height - size.height;
+        const maxX   = Math.max(0, Math.floor(bounds.width - size.width));
+        const maxY   = Math.max(0, Math.floor(bounds.height - size.height));
         const x      = Math.floor(Math.random() * (maxX + 1));
         const y      = Math.floor(Math.random() * (maxY + 1));
 
