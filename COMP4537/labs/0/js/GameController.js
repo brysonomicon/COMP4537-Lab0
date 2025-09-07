@@ -90,7 +90,7 @@ export class GameController {
 
     /**
      * Creates the required number of tiles and assigns the game logic
-     * event listener.
+     * event listener to each one.
      * @param {number} num the number of tiles to create
      */
     createTiles(num)
