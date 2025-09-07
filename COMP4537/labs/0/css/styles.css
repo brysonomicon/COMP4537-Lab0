@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    font-size: 16px;
 }
 
 body {
@@ -37,4 +38,11 @@ body {
 .status {
     margin-left: 1rem;
     font-weight: 600;
+}
+
+.game-tile {
+    opacity: 1.0;
+    color: black;
+    filter: none;
+    font-weight: bold;
 }

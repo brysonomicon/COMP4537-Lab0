@@ -14,14 +14,14 @@ export class GameTile {
      */
     static resetColors()
     {
-        for (const color in GameTile.Colors)
+        for (const color in GameTile.COLORS)
         {
             GameTile.COLORS[color] = true;
         }
     }
 
     /**
-     * Filters out the falsy colors and returns a random available color.
+     * Filters out the false colors and returns a random available color.
      */
     static getRandomColor()
     {
@@ -43,17 +43,18 @@ export class GameTile {
     {
         this.order = order;
 
-        const element = document.createElement("button");
-        element.textContent        = String(order);
-        element.style.width        = "10em";
-        element.style.height       = "5em";
-        element.style.position     = "absolute";
-        element.style.background   = GameTile.getRandomColor();
-        element.style.border       = "none";
-        element.style.borderRadius = "5px";
-        element.style.fontSize     = "2rem";
+        const tile = document.createElement("button");
+        tile.textContent        = String(order);
+        tile.style.width        = "10em";
+        tile.style.height       = "5em";
+        tile.style.position     = "absolute";
+        tile.style.background   = GameTile.getRandomColor();
+        tile.style.border       = "none";
+        tile.style.borderRadius = "5px";
+        tile.style.fontSize     = "1rem";
+        tile.classList.add('game-tile');
 
-        this.element  = element;
+        this.tile     = tile;
         this.position = position;
     }
 
@@ -63,17 +64,52 @@ export class GameTile {
      */
     setLocation(position)
     {
-        this.element.style.left = `${position.x}px`;
-        this.element.style.top  = `${position.y}px`;
+        this.tile.style.left = `${position.x}px`;
+        this.tile.style.top  = `${position.y}px`;
         this.position = position;
     }
 
     /**
-     * Get the dimensions of the game tile.
-     * @returns rectangle object of the button elements dimensions
+     * @returns rectangle of the game tile
      */
     getDimensions()
     {
-        return this.element.getBoundingClientRect();
+        return this.tile.getBoundingClientRect();
+    }
+
+    /**
+     * Hides the order number.
+     */
+    hideNumber()
+    {
+        this.tile.textContent = "";
+    }
+
+    /**
+     * Shows the order number.
+     */
+    showNumber()
+    {
+        this.tile.textContent = String(this.order);
+    }
+
+    /**
+     * Enables the tile.
+     * @returns the tile to enable chaining
+     */
+    enable()
+    {
+        this.tile.disabled = false;
+        return this;
+    }
+
+    /**
+     * Disables the tile.
+     * @returns the tile to enable chaining
+     */
+    disable()
+    {
+        this.tile.disabled = true;
+        return this;
     }
 }
