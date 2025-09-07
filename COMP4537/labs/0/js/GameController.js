@@ -2,6 +2,10 @@ import { GameTile } from "./GameTile.js";
 import { Position } from "./Position.js";
 import { LayoutManager } from "./LayoutManager.js"
 
+/**
+ * GameController controls the phases of game logic and calls on 
+ * GameTile to create tiles and LayoutManager to handle movement logic.
+ */
 export class GameController {
     constructor(messages) {
         this.messages = messages;
@@ -23,7 +27,11 @@ export class GameController {
     }
 
     /**
+     * Sets up the game area for play. 
      * 
+     * Clears the old state. Creates the buttons with visible numbers.
+     * Hides the numbers and shuffles according to the assignment specs.
+     * Passes off to the play phase function.
      */
     async prepareGameArea()
     {
@@ -62,6 +70,12 @@ export class GameController {
         this.startPlayPhase();
     }
 
+    /**
+     * Enables the game area for play.
+     * 
+     * Resets the expected order. Enables isPlaying flag. Updates status.
+     * Enables all tiles.
+     */
     startPlayPhase()
     {
         this.expectedOrder = 1;
@@ -74,6 +88,11 @@ export class GameController {
         }
     }
 
+    /**
+     * Creates the required number of tiles and assigns the game logic
+     * event listener.
+     * @param {number} num the number of tiles to create
+     */
     createTiles(num)
     {
         for (let i = 1; i <= num; ++i)
@@ -109,6 +128,11 @@ export class GameController {
         }
     }
 
+    /**
+     * Sets the isPlaying flag to false, shows and disables all tiles, adjusts the 
+     * status messages to display the win/loss message and prompt to play again.
+     * @param {*} outcome 
+     */
     async handleEndGame(outcome)
     {
         this.isPlaying = false;
@@ -129,6 +153,10 @@ export class GameController {
         this.setStatus(this.messages.STATUS_PLAY_AGAIN);
     }
 
+    /**
+     * Sets the text of the status span
+     * @param {string} text 
+     */
     setStatus(text)
     {
         if (this.status)

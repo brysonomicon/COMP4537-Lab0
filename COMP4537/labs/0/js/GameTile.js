@@ -1,3 +1,6 @@
+/**
+ * GameTile is the basic component of the memory game.
+ */
 export class GameTile {
     static COLORS = {
         "#7FFF00": true,

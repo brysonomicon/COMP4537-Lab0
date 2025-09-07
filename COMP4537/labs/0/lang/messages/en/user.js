@@ -1,3 +1,6 @@
+/**
+ * English messages.
+ */
 export class Messages {
   static HOW_MANY_BUTTONS    = "How many buttons to create?";
   static ERROR_INVALID_INPUT = "Please enter a number between 3 and 7.";

@@ -1,5 +1,8 @@
 import { Position } from "./Position.js"
 
+/**
+ * LayoutManager handles the layout/movement of GameTile objects.
+ */
 export class LayoutManager {
     /**
      * @param {HTMLElement} gameArea - container where game elements exist
