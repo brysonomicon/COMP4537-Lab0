@@ -1,24 +1,31 @@
-function saveNote()
+
+import { NoteWriter, NoteReader } from "./NoteHandler.js";
+
+function init()
 {
-    const text = document.getElementById("note").value;
-    localStorage.setItem("myNote", text);
+    console.log('alive');
+    const writerArea = document.getElementById("writer-area");
+    const readerArea = document.getElementById("reader-area");
+    const addButton  = document.getElementById("btn-add");
+
+    if (writerArea)
+    {
+        console.log('Creating NoteWriter...');
+        new NoteWriter(writerArea, addButton);
+    }
+    
+    if (readerArea)
+    {
+        console.log('Creating NoteReader...');
+        new NoteReader(readerArea);
+    }
 }
 
-function getNote()
+if (document.readyState === 'loading')
 {
-    const container = document.getElementById("reader-area");
-    const note = localStorage.getItem("myNote");
-    container.textContent = note    
-        ? note
-        : "There ain't no note";
+    await new Promise(resolve => document.addEventListener("DOMContentLoaded", init));
 }
-
-window.addEventListener("DOMContentLoaded", () => {
-    if (document.getElementById("note")) {
-        document.getElementById("btn-add").addEventListener("click", saveNote);
-    }
-
-    if (document.getElementById("reader-area")) {
-        getNote();
-    }
-});
+else 
+{
+    init();
+}
