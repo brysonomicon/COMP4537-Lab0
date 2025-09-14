@@ -22,10 +22,10 @@ function init()
         window.addEventListener("storage", () => Note.timestamp());
     }
 
-    const labTitle = document.querySelector(".title");
+    const labTitle   = document.querySelector(".title");
     const readerPage = document.getElementById("reader-page");
     const writerPage = document.getElementById("writer-page"); 
-    const backBtn    = document.querySelector(".btn-back");
+    const backBtn    = document.getElementById("btn-back");
     const addBtn     = document.getElementById("btn-add");
 
     if (labTitle) labTitle.textContent     = Messages.LAB_TITLE;

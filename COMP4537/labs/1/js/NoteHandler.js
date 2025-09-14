@@ -79,7 +79,7 @@ export class NoteWriter {
     }
 
     /**
-     * For each entry in localStorage, build a Note from the data and handles
+     * For each entry in localStorage, build a Note from the data and handle
      * the creation of the DOM elements to manage them.
      */
     display()
