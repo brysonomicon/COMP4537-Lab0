@@ -1,9 +1,10 @@
 export class Note {
-    constructor(text = "", readOnly = false)
+    constructor(text = "", readOnly = false, timestamp = Date.now())
     {
-        this.text     = text;
-        this.readOnly = readOnly;
-        this.textArea = this.buildTextArea();
+        this.text      = text;
+        this.readOnly  = readOnly;
+        this.timestamp = Number(timestamp);
+        this.textArea  = this.buildTextArea();
     }
 
     buildTextArea()
@@ -26,6 +27,21 @@ export class Note {
 
         return ta;
     }
+
+    static timestamp()
+    {
+        const span = document.querySelector(".timestamp");
+        const keys = Object.keys(localStorage);
+        if (keys.length === 0)
+        {
+            span.textContent = "";
+            return;
+        }
+
+        const latest = Math.max(...keys.map(Number));
+        const text   = new Date(latest).toLocaleString();
+        span.textContent = `Latest Note: ${text}`;
+    }
 }
 
 export class NoteWriter {
@@ -36,11 +52,13 @@ export class NoteWriter {
         this.current   = new Note(); 
         
         this.addButton.addEventListener("click", () => this.add());
+        window.addEventListener("storage", () => this.display());
+
         this.display();
     }
 
     add()
-    {
+    { 
         const text = this.current.text.trim();
         if (!text)
         {
@@ -62,9 +80,12 @@ export class NoteWriter {
 
     display()
     {
+        Note.timestamp();
         this.container.innerHTML = "";
 
-        for (const key of Object.keys(localStorage))
+        const keys = Object.keys(localStorage).sort((a, b) => Number(a) - Number(b));
+
+        for (const key of keys)
         {
             const text = localStorage.getItem(key);
             if (!text)
@@ -72,7 +93,7 @@ export class NoteWriter {
                 continue;
             }
 
-            const div = document.createElement("div");
+            const div  = document.createElement("div");
             const note = new Note(text, true);
             const removeBtn = document.createElement("button");
 
@@ -95,21 +116,24 @@ export class NoteReader {
     constructor(container)
     {
         this.container = container;
+        window.addEventListener("storage", () => this.display());
         this.display();
     }
 
     display()
     {
+        Note.timestamp();
         this.container.innerHTML = "";
 
-        for (let i = 0; i < localStorage.length; ++i)
+        const keys = Object.keys(localStorage).sort((a, b) => Number(a) - Number(b));
+
+        for (const key of keys)
         {
-            const key  = localStorage.key(i);
             const text = localStorage.getItem(key);
 
             if (text) 
             {
-                const div = document.createElement("div");
+                const div  = document.createElement("div");
                 const note = new Note(text, true);
                 div.appendChild(note.textArea);
                 this.container.appendChild(div);

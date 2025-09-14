@@ -1,23 +1,27 @@
 
-import { NoteWriter, NoteReader } from "./NoteHandler.js";
+import { NoteWriter, NoteReader, Note } from "./NoteHandler.js";
 
 function init()
 {
     console.log('alive');
     const writerArea = document.getElementById("writer-area");
     const readerArea = document.getElementById("reader-area");
-    const addButton  = document.getElementById("btn-add");
 
     if (writerArea)
     {
-        console.log('Creating NoteWriter...');
+        console.log('writin notes');
+        const addButton  = document.getElementById("btn-add");
         new NoteWriter(writerArea, addButton);
     }
-    
-    if (readerArea)
+    else if (readerArea)
     {
-        console.log('Creating NoteReader...');
+        console.log('readin notes');
         new NoteReader(readerArea);
+    }
+    else 
+    {
+        Note.timestamp();
+        window.addEventListener("storage", () => Note.timestamp());
     }
 }
 
