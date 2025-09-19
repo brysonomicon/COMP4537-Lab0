@@ -56,10 +56,6 @@ export class NoteWriter {
     add()
     { 
         const text = this.current.text;
-        if (!text)
-        {
-            return;
-        }
 
         const key = Date.now().toString();
         localStorage.setItem(key, text);
