@@ -1,3 +1,13 @@
+/*
+Lab Questions:
+1) Do two windows in the browsers have access to the same localStorage?
+    Yes
+2)Do two windows in different browsers have access to the same localStorage?
+    No
+
+localStorage 
+*/
+
 
 import { NoteWriter, NoteReader, Note } from "./NoteHandler.js";
 import { Messages } from "../lang/messages/en/user.js";

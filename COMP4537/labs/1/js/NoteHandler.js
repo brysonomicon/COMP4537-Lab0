@@ -99,15 +99,15 @@ export class NoteWriter {
 
             const div = document.createElement("div");
 
-            const textArea = document.createElement("textarea");
+            const textArea     = document.createElement("textarea");
             textArea.className = "note";
-            textArea.value = note.text;
-            textArea.readOnly = false;
+            textArea.value     = note.text;
+            textArea.readOnly  = false;
             textArea.addEventListener("input", () => { note.text = textArea.value; });
             textArea.addEventListener("blur", () => { localStorage.setItem(key, note.text); });
 
             const removeBtn = document.createElement("button");
-            removeBtn.type = "button";
+            removeBtn.type  = "button";
             removeBtn.textContent = Messages.BTN_REMOVE;
             removeBtn.addEventListener("click", () => this.remove(key));
 
@@ -118,10 +118,10 @@ export class NoteWriter {
 
         const emptyDiv = document.createElement("div");
 
-        const emptyNote = document.createElement("textarea");
-        emptyNote.className = "note";
+        const emptyNote       = document.createElement("textarea");
+        emptyNote.className   = "note";
         emptyNote.placeholder = Messages.PLACEHOLDER;
-        emptyNote.value = this.current.text;
+        emptyNote.value       = this.current.text;
         emptyNote.addEventListener("input", () => { this.current.text = emptyNote.value; });
 
         emptyDiv.appendChild(emptyNote);
