@@ -55,7 +55,7 @@ export class NoteWriter {
      */
     add()
     { 
-        const text = this.current.text.trim();
+        const text = this.current.text;
         if (!text)
         {
             return;
